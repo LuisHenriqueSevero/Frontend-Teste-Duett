@@ -1,0 +1,94 @@
+/* global.css */
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f4f6f8;
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+
+h1, h2 {
+  color: #2c3e50;
+}
+
+button {
+  cursor: pointer;
+  background-color: #2d89ef;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+  color: white;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #1b5cb8;
+}
+
+input, select {
+  padding: 8px 10px;
+  margin-bottom: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+form {
+  max-width: 400px;
+  margin: 30px auto;
+  background: white;
+  padding: 20px 30px;
+  border-radius: 6px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+.error-message {
+  color: #d93025;
+  margin-bottom: 12px;
+}
+
+.success-message {
+  color: #188038;
+  margin-bottom: 12px;
+}
+
+ul {
+  list-style: none;
+  padding-left: 0;
+  max-width: 600px;
+  margin: 30px auto;
+  background: white;
+  padding: 20px 30px;
+  border-radius: 6px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+li {
+  padding: 10px 5px;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+li:last-child {
+  border-bottom: none;
+}
+
+.nav-buttons {
+  max-width: 600px;
+  margin: 20px auto;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.nav-buttons button {
+  flex: 1;
+  max-width: 150px;
+}
