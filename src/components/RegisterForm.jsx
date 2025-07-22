@@ -13,15 +13,21 @@ export default function RegisterForm({ onSuccess, onBack }) {
   const handleRegister = async (e) => {
     e.preventDefault();
 
-    // Validação básica de CPF
-    const cpfRegex = /^\d{3}\.\d{3}\.\d{3}-\d{2}$/;
-    if (!cpfRegex.test(cpf)) {
-      setError("CPF inválido. Use o formato XXXXXXXXXXX");
+    const cpfClean = cpf.replace(/\D/g, "");
+
+    if (cpfClean.length !== 11) {
+      setError("CPF inválido. Deve conter exatamente 11 números.");
       return;
     }
 
     try {
-      await registerApi({ nome, email, cpf, senha, perfil });
+      await registerApi({
+        nome,
+        email,
+        cpf: cpfClean,
+        senha,
+        perfil,
+      });
       setSuccess("Usuário cadastrado com sucesso!");
       setError("");
       setNome("");
@@ -34,6 +40,11 @@ export default function RegisterForm({ onSuccess, onBack }) {
       const msg = err.response?.data || "Erro ao cadastrar usuário";
       setError(typeof msg === "string" ? msg : JSON.stringify(msg));
     }
+  };
+
+  const handleCpfChange = (e) => {
+    const onlyNumbers = e.target.value.replace(/\D/g, "");
+    setCpf(onlyNumbers);
   };
 
   return (
@@ -52,7 +63,7 @@ export default function RegisterForm({ onSuccess, onBack }) {
           color: "#2d89ef",
         }}
       >
-        Voltar
+        ⬅ Voltar
       </button>
 
       <h2 style={{ marginTop: "2em" }}>Cadastrar Usuário</h2>
@@ -76,9 +87,10 @@ export default function RegisterForm({ onSuccess, onBack }) {
       />
       <input
         type="text"
-        placeholder="CPF (XXXXXXXXXXX)"
+        placeholder="CPF (somente números)"
         value={cpf}
-        onChange={(e) => setCpf(e.target.value)}
+        onChange={handleCpfChange}
+        maxLength={11}
         required
       />
       <input

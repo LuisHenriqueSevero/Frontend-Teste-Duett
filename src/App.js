@@ -43,15 +43,13 @@ export default function App() {
     return <LoginForm onRegisterClick={() => setShowRegister(true)} />;
   }
 
-  // Tela admin: lista de usuários (só admin)
   if (page === "/admin") {
     if (user.perfil !== "Administrador") {
       return (
-        <>
+        <div className="access-denied-container">
           <p>⚠️ Acesso negado: Apenas administradores podem ver esta página.</p>
           <button onClick={() => goTo("/home")}>Voltar</button>
-          <button onClick={handleLogout}>Logout</button>
-        </>
+        </div>
       );
     }
     return (
@@ -61,14 +59,12 @@ export default function App() {
     );
   }
 
-  // Tela troca de senha
   if (page === "/alterar-senha") {
     return (
       <ChangePassword onBack={() => goTo("/home")} />
     );
   }
 
-  // Página home padrão
   return (
     <div className="home-container">
       <h1>Hola Mundo!</h1>

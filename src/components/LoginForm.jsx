@@ -15,8 +15,8 @@ export default function LoginForm({ onRegisterClick }) {
       const data = await loginApi(email, senha);
       dispatch(loginSuccess(data));
       setError("");
-      window.history.pushState(null, "", "/home"); // Simula navegação
-      window.dispatchEvent(new PopStateEvent("popstate")); // Força atualização
+      window.history.pushState(null, "", "/home");
+      window.dispatchEvent(new PopStateEvent("popstate"));
     } catch (err) {
       setError("Email ou senha inválidos");
     }

@@ -53,7 +53,6 @@ export default function ChangePassword({ onBack }) {
   return (
     <div className="change-password-container">
       <div className="change-password-box">
-        {/* Botão voltar */}
         <button className="back-button" onClick={onBack}>⬅ Voltar</button>
 
         <h2>Alterar Senha</h2>
