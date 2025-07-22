@@ -1,0 +1,70 @@
+.userlist-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+}
+
+.userlist-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 80%;
+  max-width: 600px;
+  margin-bottom: 20px;
+}
+
+.userlist-header h1 {
+  font-size: 2rem;
+  color: #333;
+}
+
+.back-button {
+  background-color: #2d89ef;
+  color: #fff;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.back-button:hover {
+  background-color: #1e5cb3;
+}
+
+.userlist {
+  list-style: none;
+  width: 80%;
+  max-width: 600px;
+}
+
+.user-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f5f5f5;
+  margin-bottom: 10px;
+  padding: 10px 15px;
+  border-radius: 5px;
+}
+
+.delete-button {
+  background-color: #d9534f;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.delete-button:hover {
+  background-color: #c9302c;
+}
+
+.error-message {
+  color: red;
+  text-align: center;
+  margin-top: 20px;
+}

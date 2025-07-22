@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { fetchUsersApi, deleteUserApi } from "../services/api";
+import "../styles/userlist.css";
 
-export default function UserList() {
+export default function UserList({ onBack }) {
   const [users, setUsers] = useState([]);
   const [error, setError] = useState("");
 
@@ -32,15 +33,23 @@ export default function UserList() {
   if (error) {
     return <p className="error-message">{error}</p>;
   }
-  
+
   return (
-    <div>
-      <h1>Lista de Usuários</h1>
-      <ul>
+    <div className="userlist-container">
+      <div className="userlist-header">
+        <h1>Lista de Usuários</h1>
+        <button onClick={onBack} className="back-button">← Voltar para Home</button>
+      </div>
+      <ul className="userlist">
         {users.map((user) => (
-          <li key={user.id}>
+          <li key={user.id} className="user-item">
             <span>{user.nome} - {user.email} ({user.perfil})</span>
-            <button onClick={() => handleDelete(user.id)}>Excluir</button>
+            <button
+              className="delete-button"
+              onClick={() => handleDelete(user.id)}
+            >
+              Excluir
+            </button>
           </li>
         ))}
       </ul>

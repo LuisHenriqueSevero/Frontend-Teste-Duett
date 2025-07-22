@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { loginSuccess } from "../store/authSlice";
 import { loginApi } from "../services/api";
 
-export default function LoginForm() {
+export default function LoginForm({ onRegisterClick }) {
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
@@ -41,7 +41,23 @@ export default function LoginForm() {
         required
       />
       <button type="submit">Entrar</button>
-      
+      <p style={{ marginTop: "10px" }}>
+        Não tem uma conta?{" "}
+        <button
+          type="button"
+          onClick={onRegisterClick}
+          style={{
+            background: "transparent",
+            border: "none",
+            color: "#2d89ef",
+            textDecoration: "underline",
+            cursor: "pointer",
+            padding: 0,
+          }}
+        >
+          Cadastrar
+        </button>
+      </p>
     </form>
   );
 }

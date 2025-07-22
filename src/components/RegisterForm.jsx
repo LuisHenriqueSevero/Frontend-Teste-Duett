@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { registerApi } from "../services/api";
 
-export default function RegisterForm({ onSuccess }) {
+export default function RegisterForm({ onSuccess, onBack }) {
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
   const [cpf, setCpf] = useState("");
@@ -10,18 +10,13 @@ export default function RegisterForm({ onSuccess }) {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
-  // Validação básica de CPF: deve ter 11 dígitos numéricos
-  const isValidCpf = (value) => {
-    const onlyDigits = value.replace(/\D/g, "");
-    return onlyDigits.length === 11;
-  };
-
   const handleRegister = async (e) => {
     e.preventDefault();
 
-    if (!isValidCpf(cpf)) {
-      setError("CPF inválido. Deve conter 11 dígitos numéricos.");
-      setSuccess("");
+    // Validação básica de CPF
+    const cpfRegex = /^\d{3}\.\d{3}\.\d{3}-\d{2}$/;
+    if (!cpfRegex.test(cpf)) {
+      setError("CPF inválido. Use o formato XXXXXXXXXXX");
       return;
     }
 
@@ -34,32 +29,36 @@ export default function RegisterForm({ onSuccess }) {
       setCpf("");
       setSenha("");
       setPerfil("Usuario");
-      onSuccess();
+      if (onSuccess) onSuccess();
     } catch (err) {
-      if (err.response && err.response.data) {
-        const data = err.response.data;
-        const msg = typeof data === "string" ? data : data.message || JSON.stringify(data);
-
-        if (msg.toLowerCase().includes("email")) {
-          setError("Erro: Email já cadastrado.");
-        } else if (msg.toLowerCase().includes("cpf")) {
-          setError("Erro: CPF já cadastrado.");
-        } else {
-          setError("Erro ao cadastrar usuário.");
-        }
-      } else {
-        setError("Erro ao cadastrar usuário.");
-      }
-      setSuccess("");
+      const msg = err.response?.data || "Erro ao cadastrar usuário";
+      setError(typeof msg === "string" ? msg : JSON.stringify(msg));
     }
   };
 
   return (
-    <form onSubmit={handleRegister}>
-      <h2>Cadastrar Usuário</h2>
+    <form onSubmit={handleRegister} style={{ position: "relative" }}>
+      <button
+        type="button"
+        onClick={onBack}
+        style={{
+          position: "absolute",
+          left: 0,
+          top: 0,
+          background: "transparent",
+          border: "none",
+          fontSize: "1.2em",
+          cursor: "pointer",
+          color: "#2d89ef",
+        }}
+      >
+        Voltar
+      </button>
 
-      {error && <p className="error-message">{error}</p>}
-      {success && <p className="success-message">{success}</p>}
+      <h2 style={{ marginTop: "2em" }}>Cadastrar Usuário</h2>
+
+      {error && <p style={{ color: "red" }}>{error}</p>}
+      {success && <p style={{ color: "green" }}>{success}</p>}
 
       <input
         type="text"
@@ -68,7 +67,6 @@ export default function RegisterForm({ onSuccess }) {
         onChange={(e) => setNome(e.target.value)}
         required
       />
-
       <input
         type="email"
         placeholder="Email"
@@ -76,16 +74,13 @@ export default function RegisterForm({ onSuccess }) {
         onChange={(e) => setEmail(e.target.value)}
         required
       />
-
       <input
         type="text"
-        placeholder="CPF (somente números)"
+        placeholder="CPF (XXXXXXXXXXX)"
         value={cpf}
         onChange={(e) => setCpf(e.target.value)}
-        maxLength={14} // para facilitar com pontos e traço se quiser adicionar depois
         required
       />
-
       <input
         type="password"
         placeholder="Senha"
@@ -93,13 +88,14 @@ export default function RegisterForm({ onSuccess }) {
         onChange={(e) => setSenha(e.target.value)}
         required
       />
-
       <select value={perfil} onChange={(e) => setPerfil(e.target.value)}>
         <option value="Usuario">Usuário</option>
         <option value="Administrador">Administrador</option>
       </select>
 
-      <button type="submit">Cadastrar</button>
+      <button type="submit" style={{ marginTop: "10px" }}>
+        Cadastrar
+      </button>
     </form>
   );
 }

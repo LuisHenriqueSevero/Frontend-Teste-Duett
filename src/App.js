@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import "./styles/app.css";
 
 import LoginForm from "./components/LoginForm";
 import RegisterForm from "./components/RegisterForm";
 import UserList from "./components/UserList";
-import ChangePassword from "./components/ChangePassword"; // importe o componente
+import ChangePassword from "./components/ChangePassword";
 import { logout } from "./store/authSlice";
 
 export default function App() {
@@ -33,18 +34,13 @@ export default function App() {
   if (!isAuthenticated) {
     if (showRegister) {
       return (
-        <>
-          <RegisterForm onSuccess={() => setShowRegister(false)} />
-          <button onClick={() => setShowRegister(false)}>Voltar ao Login</button>
-        </>
+        <RegisterForm
+          onSuccess={() => setShowRegister(false)}
+          onBack={() => setShowRegister(false)}
+        />
       );
     }
-    return (
-      <>
-        <LoginForm />
-        <button onClick={() => setShowRegister(true)}>Cadastrar Usuário</button>
-      </>
-    );
+    return <LoginForm onRegisterClick={() => setShowRegister(true)} />;
   }
 
   // Tela admin: lista de usuários (só admin)
@@ -60,9 +56,7 @@ export default function App() {
     }
     return (
       <>
-        <UserList />
-        <button onClick={() => goTo("/home")}>Voltar para Home</button>
-        <button onClick={handleLogout}>Logout</button>
+        <UserList onBack={() => goTo("/home")} />
       </>
     );
   }
@@ -70,22 +64,22 @@ export default function App() {
   // Tela troca de senha
   if (page === "/alterar-senha") {
     return (
-      <>
-        <ChangePassword />
-        <button onClick={() => goTo("/home")}>Voltar para Home</button>
-        <button onClick={handleLogout}>Logout</button>
-      </>
+      <ChangePassword onBack={() => goTo("/home")} />
     );
   }
 
   // Página home padrão
   return (
-    <>
+    <div className="home-container">
       <h1>Hola Mundo!</h1>
-      <p>Bem-vindo, {user.nome} ({user.perfil})</p>
-      <button onClick={() => goTo("/admin")}>Ir para Lista de Usuários</button>
-      <button onClick={() => goTo("/alterar-senha")}>Alterar Senha</button>
-      <button onClick={handleLogout}>Logout</button>
-    </>
+      <p>
+        Bem-vindo, {user.nome} ({user.perfil})
+      </p>
+      <div className="button-group">
+        <button onClick={() => goTo("/admin")}>Ir para Lista de Usuários</button>
+        <button onClick={() => goTo("/alterar-senha")}>Alterar Senha</button>
+        <button onClick={handleLogout}>Logout</button>
+      </div>
+    </div>
   );
 }
