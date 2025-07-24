@@ -6,6 +6,7 @@ import LoginForm from "./components/LoginForm";
 import RegisterForm from "./components/RegisterForm";
 import UserList from "./components/UserList";
 import ChangePassword from "./components/ChangePassword";
+import Header from "./components/Header";
 import { logout } from "./store/authSlice";
 
 export default function App() {
@@ -66,16 +67,14 @@ export default function App() {
   }
 
   return (
-    <div className="home-container">
-      <h1>Hola Mundo!</h1>
-      <p>
-        Bem-vindo, {user.nome} ({user.perfil})
-      </p>
-      <div className="button-group">
-        <button onClick={() => goTo("/admin")}>Ir para Lista de Usuários</button>
-        <button onClick={() => goTo("/alterar-senha")}>Alterar Senha</button>
-        <button onClick={handleLogout}>Logout</button>
+    <>
+      <Header onGoTo={goTo} onLogout={handleLogout} />
+      <div className="home-container">
+        <h1>Hola Mundo!</h1>
+        <p>
+          Bem-vindo, {user.nome} ({user.perfil})
+        </p>
       </div>
-    </div>
+    </>
   );
 }
