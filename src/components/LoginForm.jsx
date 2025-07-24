@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { loginSuccess } from "../store/authSlice";
 import { loginApi } from "../services/api";
+import "../styles/loginform.css";
 
 export default function LoginForm({ onRegisterClick }) {
   const dispatch = useDispatch();
@@ -23,9 +24,9 @@ export default function LoginForm({ onRegisterClick }) {
   };
 
   return (
-    <form onSubmit={handleLogin}>
+    <form onSubmit={handleLogin} className="login-form">
       <h2>Login</h2>
-      {error && <p style={{ color: "red" }}>{error}</p>}
+      {error && <p className="error">{error}</p>}
       <input
         type="email"
         placeholder="Email"
@@ -40,20 +41,15 @@ export default function LoginForm({ onRegisterClick }) {
         onChange={(e) => setSenha(e.target.value)}
         required
       />
-      <button type="submit">Entrar</button>
-      <p style={{ marginTop: "10px" }}>
+      <button type="submit" className="submit-button">
+        Entrar
+      </button>
+      <p className="register-text">
         Não tem uma conta?{" "}
         <button
           type="button"
           onClick={onRegisterClick}
-          style={{
-            background: "transparent",
-            border: "none",
-            color: "#2d89ef",
-            textDecoration: "underline",
-            cursor: "pointer",
-            padding: 0,
-          }}
+          className="register-button"
         >
           Cadastrar
         </button>

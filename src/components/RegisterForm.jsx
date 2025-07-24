@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { registerApi } from "../services/api";
+import "../styles/registerform.css";
 
 export default function RegisterForm({ onSuccess, onBack }) {
   const [nome, setNome] = useState("");
@@ -48,28 +49,20 @@ export default function RegisterForm({ onSuccess, onBack }) {
   };
 
   return (
-    <form onSubmit={handleRegister} style={{ position: "relative" }}>
+    <form onSubmit={handleRegister} className="register-form">
       <button
         type="button"
         onClick={onBack}
-        style={{
-          position: "absolute",
-          left: 0,
-          top: 0,
-          background: "transparent",
-          border: "none",
-          fontSize: "1.2em",
-          cursor: "pointer",
-          color: "#2d89ef",
-        }}
+        className="back-button"
+        aria-label="Voltar"
       >
         ⬅ Voltar
       </button>
 
-      <h2 style={{ marginTop: "2em" }}>Cadastrar Usuário</h2>
+      <h2>Cadastrar Usuário</h2>
 
-      {error && <p style={{ color: "red" }}>{error}</p>}
-      {success && <p style={{ color: "green" }}>{success}</p>}
+      {error && <p className="error">{error}</p>}
+      {success && <p className="success">{success}</p>}
 
       <input
         type="text"
@@ -105,7 +98,7 @@ export default function RegisterForm({ onSuccess, onBack }) {
         <option value="Administrador">Administrador</option>
       </select>
 
-      <button type="submit" style={{ marginTop: "10px" }}>
+      <button type="submit" className="submit-button">
         Cadastrar
       </button>
     </form>
