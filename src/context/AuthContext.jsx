@@ -7,8 +7,8 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    const savedUser = sessionStorage.getItem("user") || localStorage.getItem("user");
-    const savedToken = sessionStorage.getItem("token") || localStorage.getItem("token");
+    const savedUser = sessionStorage.getItem("user");
+    const savedToken = sessionStorage.getItem("token");
 
     if (savedUser && savedToken) {
       setUser(JSON.parse(savedUser));
