@@ -70,10 +70,12 @@ export default function App() {
     <>
       <Header onGoTo={goTo} onLogout={handleLogout} />
       <div className="home-container">
-        <h1>Hola Mundo!</h1>
+        <div className="home-text">
+          <h1>Hola Mundo!</h1>
         <p>
           Bem-vindo, {user.nome} ({user.perfil})
         </p>
+        </div>
       </div>
     </>
   );

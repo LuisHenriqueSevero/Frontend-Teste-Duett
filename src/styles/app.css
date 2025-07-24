@@ -1,45 +1,39 @@
+body, html {
+  overflow: hidden;
+  height: 100%;
+}
+
 .home-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: 90vh;
-  background-color: #f5f5f5;
+  min-height: 100vh;
+  background-color: #a8a8a8;
   text-align: center;
   font-family: Arial, sans-serif;
 }
 
 .home-container h1 {
-  font-size: 2.5rem;
+  font-size: 4.5rem;
   color: #333;
   margin-bottom: 0.5rem;
 }
 
 .home-container p {
-  font-size: 1.2rem;
+  font-size: 2.2rem;
   color: #666;
   margin-bottom: 2rem;
+}
+
+.home-text {
+  margin-bottom: 8%;
 }
 
 .button-group {
   display: flex;
   flex-direction: column;
   gap: 10px;
-}
-
-.button-group button {
-  padding: 10px 20px;
-  font-size: 1rem;
-  background-color: #2d89ef;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-}
-
-.button-group button:hover {
-  background-color: #1e5cb3;
 }
 
 .access-denied-container {
